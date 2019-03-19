@@ -1,0 +1,50 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">x</button>
+  <h4 class="modal-title" id="myModalLabel">Comments</h4>
+</div>
+<div class="modal-body">
+  <table class="table">
+  <%i=0%>
+    <%all_comments.each do |comment|%>
+        <tr>
+          <td ><%=i=i+1%></td>
+          <td>
+            <%=get_username(comment.user_id)%>
+          </td>
+          <td>
+             <%=comment.body%>
+          </td>
+          <td>
+             <%=comment.created_at.strftime("%e %b %Y %H:%M:%S%p")%>
+          </td>
+        </tr>
+    <%end%>
+      <tr>
+        <td colspan="4">
+        <h5>Add a comment:</h5>
+        <form id="reply_form">
+            <div class="form-group">
+              <textarea class="form-control" rows="3" id="body" name="body"></textarea>
+              <input type="hidden" name="post_id" value="<%=post.id%>">
+              <input type="hidden" name="user_id" value="<%=current_user.id%>">
+          </div>
+        </form>
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary reply">Submit</button>
+</div>
+
+<script type="text/javascript">
+  $( ".reply" ).click(function() {
+    var postData = $("#reply_form").serialize();
+    $.ajax({
+            type: "POST",
+            url: "/new_comment",
+            data: postData,
+            dataType: "script",
+        })
+  });
+</script>

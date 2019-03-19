@@ -1,0 +1,3 @@
+$("#modal-window").find(".modal-content").html("<%= j (render 'all_comments', all_comments: @comments, post: @post) %>");
+$("#modal-window").modal();
+$("#modal-window").css("cssText", "display: block !important;");

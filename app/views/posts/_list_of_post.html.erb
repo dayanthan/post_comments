@@ -1,0 +1,34 @@
+<table class="table table-striped all-post">
+  <tbody>
+    <% posts.each do |post| %>
+      <tr class="top_bottom">
+        <td colspan="3">
+          <h3><%=get_username(post.user_id).capitalize%></h3>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3"><%= truncate(post.body, :length => 250) %></td>
+     </tr>
+      <tr class="top_bottom">
+        <td><%= time_ago_in_words(post.created_at) %>ago</td>
+        <td>
+          <div class="target" >
+            <%=like_count(post.id)%>
+            <%if check_staus(post.id)%>
+            <%=image_tag "/assets/enable.png", class: "optional_class", :onClick => "myFunction(#{post.id})".html_safe%>
+            <%else%>
+            <%=image_tag "/assets/disable.png", class: "optional_class", :onClick => "myFunction(#{post.id})".html_safe%>
+            <%end%>
+          </div>
+        </td>
+        <td> <%= link_to "(#{comments_count(post.id)}) Comments", all_comments_path(post.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-xs'}  %>
+        </td>
+      </tr>
+    <% end %>
+    <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+  </tbody>
+</table>

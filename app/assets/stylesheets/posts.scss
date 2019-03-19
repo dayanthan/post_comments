@@ -1,0 +1,22 @@
+// Place all the styles related to the posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.optional_class{
+	height: 16px;
+}
+table.all-post tr td, table.all-post tr{
+	border:none;
+	background:none !important;
+}
+table.all-post tr{
+	border: none;
+}
+table.all-post tr:nth-child(3n){
+	border-bottom:1px solid #ccc;
+}
+.top_bottom{
+	color: #FFA07A;
+    font-weight: bold;
+}
